@@ -227,7 +227,8 @@ class BluetoothTerminal {
           '" bluetooth device is already disconnected');
       return;
     }
-
+    let el = document.getElementById("status-bullet");
+    el.className = "disconnected";
     device.gatt.disconnect();
 
     this._log('"' + device.name + '" bluetooth device disconnected');
@@ -301,7 +302,8 @@ class BluetoothTerminal {
     return characteristic.startNotifications().
         then(() => {
           this._log('Notifications started');
-
+          let el = document.getElementById("status-bullet");
+          el.className = "connected";
           characteristic.addEventListener('characteristicvaluechanged',
               this._boundHandleCharacteristicValueChanged);
         });
